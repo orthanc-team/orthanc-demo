@@ -54,8 +54,7 @@ services:
             }
           },
           "DicomWeb": {
-            "PublicRoot": "/orthanc/dicom-web/",
-            "Host": "https://demo.orthanc.team"
+            "PublicRoot": "/orthanc/dicom-web/"
           },
           "StoneWebViewer": {
             "ShowInfoPanelAtStartup": "Never"
