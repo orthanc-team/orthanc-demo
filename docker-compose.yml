@@ -26,6 +26,7 @@ services:
       ORTHANC__NAME: "Orthanc"
       VERBOSE_ENABLED: "true"
       VERBOSE_STARTUP: "true"
+      VOLVIEW_PLUGIN_ENABLED: "true"
       ORTHANC_JSON: |
         {
           "OrthancExplorer2": {
@@ -74,7 +75,8 @@ services:
             "StandardConfigurations" : [
               "stone-webviewer",
               "orthanc-explorer-2",
-              "ohif"
+              "ohif",
+              "volview"
             ],
             "CheckedLevel": "studies",
             "TokenHttpHeaders" : [ "api-key" ],
