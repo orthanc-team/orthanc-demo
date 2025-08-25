@@ -1,8 +1,7 @@
 services:
 
   nginx:
-    # for this change: https://github.com/orthanc-team/orthanc-auth-service/commit/9e01ed6eacdf3bddcab943918b98baa41ae10316
-    image: orthancteam/orthanc-nginx-certbot:main
+    image: orthancteam/orthanc-nginx-certbot:25.8.1
     depends_on: [orthanc, orthanc-auth-service]
     restart: unless-stopped
     ports: ["80:80", "443:443"]
@@ -96,7 +95,7 @@ services:
       POSTGRES_HOST_AUTH_METHOD: "trust"
 
   orthanc-auth-service:
-    image: orthancteam/orthanc-auth-service:main
+    image: orthancteam/orthanc-auth-service:25.8.1
     depends_on: [keycloak]
     restart: unless-stopped
     environment:
@@ -117,18 +116,18 @@ services:
       - ./permissions.json:/orthanc_auth_service/permissions.json
 
   ohif:
-    image: orthancteam/ohif-v3:main
+    image: orthancteam/ohif-v3:25.8.1
 #  uncomment if you want to customize ohif configuration
 #    volumes:
 #      - ./ohif-app-config.js:/usr/share/nginx/html/app-config.js
     restart: unless-stopped
 
   meddream-token-service:
-    image: orthancteam/meddream-token-service:main
+    image: orthancteam/meddream-token-service:25.8.1
     restart: unless-stopped
 
   meddream-viewer:
-    image: orthancteam/meddream-viewer:main
+    image: orthancteam/meddream-viewer:25.8.1
     restart: unless-stopped
     depends_on:
       - orthanc-for-api
@@ -165,7 +164,7 @@ services:
       - orthanc-api.secret.json
 
   keycloak:
-    image: orthancteam/orthanc-keycloak:main
+    image: orthancteam/orthanc-keycloak:25.8.1
     depends_on: [keycloak-db]
     restart: unless-stopped
     environment:
