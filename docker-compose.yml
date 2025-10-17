@@ -28,6 +28,7 @@ services:
       VOLVIEW_PLUGIN_ENABLED: "true"
       ORTHANC_JSON: |
         {
+          "ZipLoaderThreads": 4,
           "OrthancExplorer2": {
             "UiOptions": {
               "StudyListSearchMode": "search-button",
@@ -185,11 +186,60 @@ services:
       POSTGRES_USER: "keycloak"
       POSTGRES_DB: "keycloak"
 
+### monitoring
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+      #- ./secrets/grafana-secret:/etc/prometheus/grafana-secret
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=15d
+    # ports:
+    #   - "9090:9090"
+    restart: unless-stopped
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    # ports:
+    #   - "9100:9100"
+    restart: unless-stopped
+    command:
+      - --path.rootfs=/host
+    volumes:
+      - "/:/host:ro,rslave"
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    # ports:
+    #   - "8080:8080"
+    restart: unless-stopped
+    volumes:
+      - "/:/rootfs:ro"
+      - "/var/run:/var/run:rw"
+      - "/sys:/sys:ro"
+      - "/var/lib/docker/:/var/lib/docker:ro"
+      - "/dev/disk/:/dev/disk:ro"
+
+  grafana:
+    image: grafana/grafana:latest
+    # ports:
+    #   - "3000:3000"
+    restart: unless-stopped
+    volumes:
+      - grafana-data:/var/lib/grafana
+
 volumes:
   keycloak-db:
   orthanc-data:
   orthanc-index:
   meddream-license:
+  
+  grafana-data:
+  prometheus-data:
 
 secrets:
   ORTHANC__AUTHORIZATION__WEB_SERVICE_PASSWORD:
