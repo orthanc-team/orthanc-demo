@@ -1,0 +1,35 @@
+global:
+  scrape_interval: 15s
+  
+  external_labels:
+    deployment_name: orthanc-demo
+
+# remote_write:
+#   - url: "https://prometheus-prod-13-prod-us-east-0.grafana.net/api/prom/push"
+#     basic_auth:
+#       username: 1220892
+#       password_file: /etc/prometheus/grafana-secret
+
+# remote_write:
+#   - url: "https://listener-eu.logz.io:8053"
+#     bearer_token: WobfPLeRgPEnvNcmwgGIDEZdsHTAPcpy
+#     remote_timeout: 30s
+#     queue_config:
+#       batch_send_deadline: 5s  #default = 5s
+#       max_shards: 10  #default = 1000
+#       min_shards: 1
+#       max_samples_per_send: 500 #default = 100
+#       capacity: 10000  #default = 500
+      
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['prometheus:9090']
+
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080']
