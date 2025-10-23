@@ -80,7 +80,10 @@ services:
             "CheckedLevel": "studies",
             "TokenHttpHeaders" : [ "api-key" ],
             "UncheckedResources" : [
-              "/app/images/unsupported.png"]
+              "/app/images/unsupported.png"],
+            "ExtraPermissions": [
+              ["get", "^/tools/metrics-prometheus$", "view|all"]
+            ]
           }
         }
     secrets:
