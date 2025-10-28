@@ -4,11 +4,11 @@ global:
   external_labels:
     deployment_name: orthanc-demo
 
-# remote_write:
-#   - url: "https://prometheus-prod-13-prod-us-east-0.grafana.net/api/prom/push"
-#     basic_auth:
-#       username: 1220892
-#       password_file: /etc/prometheus/grafana-secret
+remote_write:
+  - url: "https://prometheus-prod-13-prod-us-east-0.grafana.net/api/prom/push"
+    basic_auth:
+      username: 1220892
+      password_file: /etc/prometheus/grafana-secret
 
 # remote_write:
 #   - url: "https://listener-eu.logz.io:8053"
@@ -38,6 +38,7 @@ scrape_configs:
     metrics_path: /tools/metrics-prometheus
     static_configs:
       - targets: ['orthanc:8042']
-    authorization:
-      type: 'api-key'
-      credentials: 'flezflezjflezkjflkdsqfaoz'
+    http_headers:
+      api-key:
+        values: ['flezflezjflezkjflkdsqfaoz']
+# TODO replace values by secret

@@ -196,7 +196,7 @@ services:
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus-data:/prometheus
-      #- ./secrets/grafana-secret:/etc/prometheus/grafana-secret
+      - ./secrets/grafana-secret:/etc/prometheus/grafana-secret
     command:
       - --config.file=/etc/prometheus/prometheus.yml
       - --storage.tsdb.path=/prometheus
