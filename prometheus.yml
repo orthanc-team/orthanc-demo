@@ -10,6 +10,50 @@ remote_write:
       username: 1220892
       password_file: /etc/prometheus/grafana-secret
 
+    write_relabel_configs:
+      # Keep only relevant metrics (to limit Grafna.net cost)
+      - source_labels: [__name__]
+        regex: |
+          node_cpu_seconds_total|
+          node_memory_MemTotal_bytes|
+          node_memory_MemFree_bytes|
+          node_memory_Cached_bytes|
+          node_memory_Buffers_bytes|
+          node_memory_SReclaimable_bytes|
+          node_memory_Cached_bytes|
+          node_memory_SwapFree_bytes|
+          node_memory_SwapTotal_bytes|
+          node_network_receive_bytes_total|
+          node_network_transmit_bytes_total|
+          node_filesystem_size_bytes|
+          node_filesystem_avail_bytes|
+          container_cpu_user_seconds_total|
+          container_memory_usage_bytes|
+          container_network_receive_bytes_total|
+          container_network_transmit_bytes_total|
+          container_fs_writes_bytes_total|
+          container_fs_reads_bytes_total|
+          container_last_seen|
+          container_start_time_seconds|
+          orthanc_count_instances|
+          orthanc_count_patients|
+          orthanc_count_series|
+          orthanc_count_studies|
+          orthanc_disk_size_mb|
+          orthanc_jobs_completed|
+          orthanc_jobs_failed|
+          orthanc_jobs_pending|
+          orthanc_jobs_running|
+          orthanc_jobs_success|
+          orthanc_rest_api_duration_ms|
+          orthanc_store_dicom_duration_ms|
+          orthanc_find_scp_duration_ms
+        action: keep
+      # Drop everything else
+      - action: drop
+
+
+# TODO: clear that as soon as it is not needed
 # remote_write:
 #   - url: "https://listener-eu.logz.io:8053"
 #     bearer_token: WobfPLeRgPEnvNcmwgGIDEZdsHTAPcpy
@@ -22,9 +66,6 @@ remote_write:
 #       capacity: 10000  #default = 500
       
 scrape_configs:
-  - job_name: 'prometheus'
-    static_configs:
-      - targets: ['prometheus:9090']
 
   - job_name: 'node-exporter'
     static_configs:
@@ -40,5 +81,4 @@ scrape_configs:
       - targets: ['orthanc:8042']
     http_headers:
       api-key:
-        values: ['flezflezjflezkjflkdsqfaoz']
-# TODO replace values by secret
+        files: ['/etc/prometheus/orthanc-api-key-secret']
