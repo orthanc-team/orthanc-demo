@@ -9,11 +9,10 @@ remote_write:
     basic_auth:
       username: 1220892
       password_file: /etc/prometheus/grafana-secret
-
     write_relabel_configs:
       # Keep only relevant metrics (to limit Grafna.net cost)
       - source_labels: [__name__]
-        regex: |
+        regex: "
           node_cpu_seconds_total|
           node_memory_MemTotal_bytes|
           node_memory_MemFree_bytes|
@@ -47,10 +46,8 @@ remote_write:
           orthanc_jobs_success|
           orthanc_rest_api_duration_ms|
           orthanc_store_dicom_duration_ms|
-          orthanc_find_scp_duration_ms
+          orthanc_find_scp_duration_ms"
         action: keep
-      # Drop everything else
-      - action: drop
 
 
 # TODO: clear that as soon as it is not needed
