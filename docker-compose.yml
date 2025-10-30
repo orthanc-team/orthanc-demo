@@ -229,6 +229,7 @@ services:
       - "/dev/disk/:/dev/disk:ro"
     command:
       - "--disable_metrics=percpu,sched,tcp,udp,diskIO"
+      - "--docker_only=true"
 
   grafana:
     image: grafana/grafana:latest
