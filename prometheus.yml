@@ -49,18 +49,6 @@ remote_write:
           orthanc_find_scp_duration_ms"
         action: keep
 
-
-# TODO: clear that as soon as it is not needed
-# remote_write:
-#   - url: "https://listener-eu.logz.io:8053"
-#     bearer_token: WobfPLeRgPEnvNcmwgGIDEZdsHTAPcpy
-#     remote_timeout: 30s
-#     queue_config:
-#       batch_send_deadline: 5s  #default = 5s
-#       max_shards: 10  #default = 1000
-#       min_shards: 1
-#       max_samples_per_send: 500 #default = 100
-#       capacity: 10000  #default = 500
       
 scrape_configs:
 
@@ -79,3 +67,11 @@ scrape_configs:
     http_headers:
       api-key:
         files: ['/etc/prometheus/orthanc-api-key-secret']
+
+  - job_name: 'orthanc-api'
+    metrics_path: /tools/metrics-prometheus
+    static_configs:
+      - targets: ['orthanc-for-api:8042']
+    basic_auth:
+      username: prometheus-user
+      password_file: /etc/prometheus/grafana-secret
