@@ -74,4 +74,4 @@ scrape_configs:
       - targets: ['orthanc-for-api:8042']
     basic_auth:
       username: prometheus-user
-      password_file: /etc/prometheus/grafana-secret
+      password_file: /etc/prometheus/orthanc-for-api-secret

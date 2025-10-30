@@ -198,6 +198,7 @@ services:
       - prometheus-data:/prometheus
       - ./secrets/grafana-secret:/etc/prometheus/grafana-secret
       - ./secrets/orthanc-api-key-secret:/etc/prometheus/orthanc-api-key-secret
+      - ./secrets/orthanc-for-api-secret:/etc/prometheus/orthanc-for-api-secret
     command:
       - --config.file=/etc/prometheus/prometheus.yml
       - --storage.tsdb.path=/prometheus
