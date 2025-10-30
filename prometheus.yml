@@ -12,41 +12,41 @@ remote_write:
     write_relabel_configs:
       # Keep only relevant metrics (to limit Grafna.net cost)
       - source_labels: [__name__]
-        regex: |
-          node_cpu_seconds_total|
-          node_memory_MemTotal_bytes|
-          node_memory_MemFree_bytes|
-          node_memory_Cached_bytes|
-          node_memory_Buffers_bytes|
-          node_memory_SReclaimable_bytes|
-          node_memory_Cached_bytes|
-          node_memory_SwapFree_bytes|
-          node_memory_SwapTotal_bytes|
-          node_network_receive_bytes_total|
-          node_network_transmit_bytes_total|
-          node_filesystem_size_bytes|
-          node_filesystem_avail_bytes|
-          container_cpu_user_seconds_total|
-          container_memory_usage_bytes|
-          container_network_receive_bytes_total|
-          container_network_transmit_bytes_total|
-          container_fs_writes_bytes_total|
-          container_fs_reads_bytes_total|
-          container_last_seen|
-          container_start_time_seconds|
-          orthanc_count_instances|
-          orthanc_count_patients|
-          orthanc_count_series|
-          orthanc_count_studies|
-          orthanc_disk_size_mb|
-          orthanc_jobs_completed|
-          orthanc_jobs_failed|
-          orthanc_jobs_pending|
-          orthanc_jobs_running|
-          orthanc_jobs_success|
-          orthanc_rest_api_duration_ms|
-          orthanc_store_dicom_duration_ms|
-          orthanc_find_scp_duration_ms
+        regex: "\
+          node_cpu_seconds_total|\
+          node_memory_MemTotal_bytes|\
+          node_memory_MemFree_bytes|\
+          node_memory_Cached_bytes|\
+          node_memory_Buffers_bytes|\
+          node_memory_SReclaimable_bytes|\
+          node_memory_Cached_bytes|\
+          node_memory_SwapFree_bytes|\
+          node_memory_SwapTotal_bytes|\
+          node_network_receive_bytes_total|\
+          node_network_transmit_bytes_total|\
+          node_filesystem_size_bytes|\
+          node_filesystem_avail_bytes|\
+          container_cpu_user_seconds_total|\
+          container_memory_usage_bytes|\
+          container_network_receive_bytes_total|\
+          container_network_transmit_bytes_total|\
+          container_fs_writes_bytes_total|\
+          container_fs_reads_bytes_total|\
+          container_last_seen|\
+          container_start_time_seconds|\
+          orthanc_count_instances|\
+          orthanc_count_patients|\
+          orthanc_count_series|\
+          orthanc_count_studies|\
+          orthanc_disk_size_mb|\
+          orthanc_jobs_completed|\
+          orthanc_jobs_failed|\
+          orthanc_jobs_pending|\
+          orthanc_jobs_running|\
+          orthanc_jobs_success|\
+          orthanc_rest_api_duration_ms|\
+          orthanc_store_dicom_duration_ms|\
+          orthanc_find_scp_duration_ms"
         action: keep
 
 
