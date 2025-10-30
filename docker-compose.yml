@@ -228,7 +228,6 @@ services:
       - "/var/lib/docker/:/var/lib/docker:ro"
       - "/dev/disk/:/dev/disk:ro"
     command:
-      - "--housekeeping_interval=10s"
       - "--disable_metrics=percpu,sched,tcp,udp,diskIO"
 
   grafana:
