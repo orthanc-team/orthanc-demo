@@ -103,9 +103,9 @@ services:
               ["post", "^/plugins/inbox/commit$", "upload|all"],
               ["post", "^/plugins/inbox/monitor-processing$", "upload|all"],
               ["get", "^/tools/metrics-prometheus$", "view|all"]
-            ],
+            ]
+          },
           "PythonScript": "/scripts/inbox-plugin.py"
-          }
         }
     secrets:
       - ORTHANC__AUTHORIZATION__WEB_SERVICE_PASSWORD
