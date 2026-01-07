@@ -277,4 +277,4 @@ orthanc.RegisterRestCallback('/plugins/inbox/validate-form', on_post_validate_fo
 orthanc.RegisterRestCallback('/plugins/inbox/commit', on_post_inbox_commit)
 orthanc.RegisterRestCallback('/plugins/inbox/monitor-processing', on_post_monitor_processing)
 
-orthanc.RegisterOnChangeCallback(on_change)
+#orthanc.RegisterOnChangeCallback(on_change)
