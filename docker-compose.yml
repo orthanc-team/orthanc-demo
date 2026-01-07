@@ -45,13 +45,30 @@ services:
             },
             "Tokens" : {
               "InstantLinksValidity": 3600,
-              "ShareType": "meddream-viewer-publication"
+              "ShareType": "ohif-viewer-publication"
             },
             "Keycloak" : {
               "Enable": true,
               "Url": "https://demo.orthanc.team/keycloak",
               "Realm": "orthanc",
               "ClientId": "orthanc"
+            },
+            "Inbox": {
+              "Enable": true,
+              "EnableAnonymousAccess": false,
+              "Title": "ICB inbox",
+              "IntroTextHtml": "<p>Déposez ici vos fichiers DICOM à destination de l'ICB.</p>",
+              "CommitUrl": "plugins/inbox/commit",
+              "FormValidationUrl": "plugins/inbox/validate-form",
+              "ProcessingMonitoringUrl": "plugins/inbox/monitor-processing",
+              "FormFields": [
+                {
+                  "Type" : "Text",
+                  "Title": "Expéditeur:",
+                  "Id": "SenderName",
+                  "Placeholder": "Dr MARTIN"
+                }
+              ]
             }
           },
           "DicomWeb": {
@@ -65,7 +82,7 @@ services:
           },
           "DicomModalities": {
             "OLD-PACS": ["OLD-PACS", "192.168.1.222", 50000],
-            "SYNGOVIA": ["SYNGOVIA", "192.168.1.223", 50002]
+            "RAYSTATION": ["RAYSTATION", "192.168.1.223", 50002]
           },
           "AuthenticationEnabled": false,     // because it is handled by the authorization plugin
           "Authorization": {
@@ -82,6 +99,9 @@ services:
             "UncheckedResources" : [
               "/app/images/unsupported.png"],
             "ExtraPermissions": [
+              ["post", "^/plugins/inbox/validate-form$", "upload|all"],
+              ["post", "^/plugins/inbox/commit$", "upload|all"],
+              ["post", "^/plugins/inbox/monitor-processing$", "upload|all"],
               ["get", "^/tools/metrics-prometheus$", "view|all"]
             ]
           }
