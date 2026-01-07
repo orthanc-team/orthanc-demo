@@ -20,6 +20,7 @@ services:
     depends_on: [postgres]
     volumes:
       - orthanc-data:/var/lib/orthanc/db:Z
+      - ./inbox-plugin.py:/scripts/inbox-plugin.py
     restart: unless-stopped
     environment:
       ORTHANC__NAME: "Orthanc"
@@ -32,7 +33,6 @@ services:
           "OrthancExplorer2": {
             "UiOptions": {
               "StudyListSearchMode": "search-button",
-              "StudyListContentIfNoSearch": "empty",
               "ShowSamePatientStudiesFilter": ["PatientBirthDate", "PatientID"],
               "MedDreamViewerPublicRoot": "https://demo.orthanc.team/meddream/",
               "EnableApiViewMenu": true,
@@ -103,7 +103,8 @@ services:
               ["post", "^/plugins/inbox/commit$", "upload|all"],
               ["post", "^/plugins/inbox/monitor-processing$", "upload|all"],
               ["get", "^/tools/metrics-prometheus$", "view|all"]
-            ]
+            ],
+          "PythonScript": "/scripts/inbox-plugin.py"
           }
         }
     secrets:
