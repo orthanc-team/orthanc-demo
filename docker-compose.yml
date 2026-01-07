@@ -1,7 +1,7 @@
 services:
 
   nginx:
-    image: orthancteam/orthanc-nginx-certbot:25.9.0
+    image: orthancteam/orthanc-nginx-certbot:25.12.0
     depends_on: [orthanc, orthanc-auth-service]
     restart: unless-stopped
     ports: ["80:80", "443:443"]
@@ -16,7 +16,7 @@ services:
       CERTBOT_EMAIL: "ops@orthanc.team"
 
   orthanc:
-    image: orthancteam/orthanc:25.10.5
+    image: orthancteam/orthanc:25.12.3
     depends_on: [postgres]
     volumes:
       - orthanc-data:/var/lib/orthanc/db:Z
@@ -118,7 +118,7 @@ services:
       POSTGRES_HOST_AUTH_METHOD: "trust"
 
   orthanc-auth-service:
-    image: orthancteam/orthanc-auth-service:25.9.0
+    image: orthancteam/orthanc-auth-service:25.12.0
     depends_on: [keycloak]
     restart: unless-stopped
     environment:
@@ -139,18 +139,18 @@ services:
       - ./permissions.json:/orthanc_auth_service/permissions.json
 
   ohif:
-    image: orthancteam/ohif-v3:25.9.0
+    image: orthancteam/ohif-v3:25.12.0
 #  uncomment if you want to customize ohif configuration
 #    volumes:
 #      - ./ohif-app-config.js:/usr/share/nginx/html/app-config.js
     restart: unless-stopped
 
   meddream-token-service:
-    image: orthancteam/meddream-token-service:25.9.0
+    image: orthancteam/meddream-token-service:25.12.0
     restart: unless-stopped
 
   meddream-viewer:
-    image: orthancteam/meddream-viewer:25.9.0
+    image: orthancteam/meddream-viewer:25.12.0
     restart: unless-stopped
     depends_on:
       - orthanc-for-api
@@ -167,7 +167,7 @@ services:
 
   # An orthanc dedicated for API accesses and also used by MedDream
   orthanc-for-api:
-    image: orthancteam/orthanc:25.10.5
+    image: orthancteam/orthanc:25.12.3
     volumes:
       - orthanc-data:/var/lib/orthanc/db:Z
     depends_on: [postgres]
@@ -187,7 +187,7 @@ services:
       - orthanc-api.secret.json
 
   keycloak:
-    image: orthancteam/orthanc-keycloak:25.9.0
+    image: orthancteam/orthanc-keycloak:25.12.0
     depends_on: [keycloak-db]
     restart: unless-stopped
     environment:
