@@ -45,7 +45,15 @@ services:
             },
             "Tokens" : {
               "InstantLinksValidity": 3600,
-              "ShareType": "ohif-viewer-publication"
+              "ShareType": "ohif-viewer-publication",
+              "LandingOptions" : [
+                {
+                    "Type" : "open-viewer-button"
+                },
+                {
+                    "Type" : "download-study"
+                }
+              ]
             },
             "Keycloak" : {
               "Enable": true,
