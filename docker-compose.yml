@@ -155,11 +155,11 @@ services:
     restart: unless-stopped
 
   meddream-token-service:
-    image: orthancteam/meddream-token-service:25.12.0
+    image: orthancteam/meddream-token-service:main
     restart: unless-stopped
 
   meddream-viewer:
-    image: orthancteam/meddream-viewer:25.12.0
+    image: orthancteam/meddream-viewer:main
     restart: unless-stopped
     depends_on:
       - orthanc-for-api
