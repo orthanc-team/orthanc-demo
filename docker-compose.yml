@@ -173,6 +173,7 @@ services:
       - ./secrets/meddream.secret.env
     volumes:
       - meddream-license:/opt/meddream/license
+      - meddream-settings:/opt/meddream/sys/settings
 
   # An orthanc dedicated for API accesses and also used by MedDream
   orthanc-for-api:
