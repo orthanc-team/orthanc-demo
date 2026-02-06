@@ -277,6 +277,7 @@ volumes:
   orthanc-data:
   orthanc-index:
   meddream-license:
+  meddream-settings:
   
   grafana-data:
   prometheus-data:
