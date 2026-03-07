@@ -32,6 +32,7 @@ services:
           "ZipLoaderThreads": 4,
           "OrthancExplorer2": {
             "UiOptions": {
+              "EnableMultiLabelsSearch": true,
               "StudyListSearchMode": "search-button",
               "ShowSamePatientStudiesFilter": ["PatientBirthDate", "PatientID"],
               "MedDreamViewerPublicRoot": "https://demo.orthanc.team/meddream/",
