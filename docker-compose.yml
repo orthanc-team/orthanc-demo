@@ -43,8 +43,52 @@ services:
               "ShareDurations": [0, 7, 15, 30, 90, 365],
               "EnableOpenInOhifViewer3": true,
               "EnableOpenInMedDreamViewer": true,
-              "OhifViewer3PublicRoot": "https://demo.orthanc.team/ohif/"
+              "OhifViewer3PublicRoot": "https://demo.orthanc.team/ohif/",
+              "NewWorklistDefaultTags": {
+                "PatientID": {
+                    "Required": true
+                },
+                "PatientBirthDate": {
+                },
+                "PatientName": {
+                    "Required": true,
+                    "PatientNameType": "Computed",
+                    "ComputedFrom": ["lastName", "firstName"]
+                },
+                "PatientSex": {
+                    "Choices": ["F", "M", "U", "O"]
+                },
+                "StudyInstanceUID": {
+                    "DefaultValue": "$$GENERATE_DICOM_UUID$$",
+                    "Editable": false
+                },
+                "InstitutionName": {
+                    "DefaultValue": "My institution"
+                },
+                "ScheduledProcedureStepSequence": {
+                    "DefaultValue": [
+                        {
+                            "ScheduledProcedureStepStartDate": {
+                                "DefaultValue": "$$TODAY$$",
+                                "Required": true
+                            },
+                            "Modality": {
+                                "Choices": ["DX", "US"],
+                                "DefaultValue": "DX",
+                                "Required": true
+                            },
+                            "ScheduledProcedureStepDescription": {
+                            }
+                        }
+                    ]
+                }
+              }
             },
+            "Worklists": {
+              "Enable": true,
+              "SaveInOrthancDatabase": true,
+              "DeleteWorklistsDelay": 1
+            }
             "Tokens" : {
               "InstantLinksValidity": 3600,
               "ShareType": "ohif-viewer-publication",
