@@ -16,7 +16,7 @@ services:
       CERTBOT_EMAIL: "ops@orthanc.team"
 
   orthanc:
-    image: orthancteam/orthanc:26.1.0
+    image: orthancteam/orthanc:26.4.2
     depends_on: [postgres]
     volumes:
       - orthanc-data:/var/lib/orthanc/db:Z
@@ -27,6 +27,7 @@ services:
       VERBOSE_ENABLED: "true"
       VERBOSE_STARTUP: "true"
       VOLVIEW_PLUGIN_ENABLED: "true"
+      STONE_WEB_VIEWER_PLUGIN_ENABLED: "true"
       ORTHANC_JSON: |
         {
           "ZipLoaderThreads": 4,
@@ -178,7 +179,7 @@ services:
 
   # An orthanc dedicated for API accesses and also used by MedDream
   orthanc-for-api:
-    image: orthancteam/orthanc:26.1.0
+    image: orthancteam/orthanc:26.4.2
     volumes:
       - orthanc-data:/var/lib/orthanc/db:Z
     depends_on: [postgres]
