@@ -31,6 +31,11 @@ services:
       ORTHANC_JSON: |
         {
           "ZipLoaderThreads": 4,
+          "Worklists": {
+            "Enable": true,
+            "SaveInOrthancDatabase": true,
+            "DeleteWorklistsDelay": 1
+          },
           "OrthancExplorer2": {
             "UiOptions": {
               "EnableMultiLabelsSearch": true,
@@ -83,11 +88,6 @@ services:
                     ]
                 }
               }
-            },
-            "Worklists": {
-              "Enable": true,
-              "SaveInOrthancDatabase": true,
-              "DeleteWorklistsDelay": 1
             },
             "Tokens" : {
               "InstantLinksValidity": 3600,
