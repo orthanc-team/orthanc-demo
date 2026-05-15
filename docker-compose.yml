@@ -88,7 +88,7 @@ services:
               "Enable": true,
               "SaveInOrthancDatabase": true,
               "DeleteWorklistsDelay": 1
-            }
+            },
             "Tokens" : {
               "InstantLinksValidity": 3600,
               "ShareType": "ohif-viewer-publication",
